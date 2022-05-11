@@ -32,4 +32,5 @@ class RobertaOutput(nn.Module):
 ->      self.layer_output.retain_grad()
         return hidden_states
 ```
+Instead of editting those on your own, you can use my customized file. (You have to download modeling_roberta.py and move it into python3.x/site-packages/transformers/models/roberta/)
 It can be applicated into various models. You can customize those editting 'OOOSelfAttention, OOOOutput, OOOForSequenceClassification' functions (or other functions if you want to apply this in other tasks).
