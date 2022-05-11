@@ -119,7 +119,7 @@ def run_taskemb(dataset_name, modelpath, taskname):
 
     dataset = load_dataset('json', data_files={'test': dataset_name},
                            field='data')
-    test_dataset = dataset["test"].shuffle(seed=42)
+    test_dataset = dataset["test"].shuffle(seed=42) # You can select which dataset to try
     model = AutoModelForSequenceClassification.from_pretrained(modelpath)
     tokenizer = AutoTokenizer.from_pretrained(modelpath)
     model.to(device)
@@ -135,26 +135,10 @@ def run_taskemb(dataset_name, modelpath, taskname):
 
 def main():
     run_taskemb(
-        dataset_name='./data/labeled_sst/labeled3_sst_train.json',
-        modelpath='./checkpoints/sentiment/senti_sst_labeled3/best-loss',
-        taskname='SST'
+        dataset_name='./your/onw/dataset/path/',
+        modelpath='./your/own/model/checkpoint/path',
+        taskname='abcd'
     )
-    run_taskemb(
-        dataset_name='./data/labeled_imdb/labeled_imdb_train.json',
-        modelpath='./checkpoints/sentiment/senti_imdb/best-loss',
-        taskname='imdb'
-    )
-    run_taskemb(
-        dataset_name='./data/labeled_cola/labeled_cola_train.json',
-        modelpath='./checkpoints/another_task/cola/best-loss',
-        taskname='cola'
-    )
-    run_taskemb(
-        dataset_name='./data/labeled_agnews/labeled_agnews_train.json',
-        modelpath='./checkpoints/another_task/agnews/best-loss',
-        taskname='agnews'
-    )
-
 
 if __name__ == "__main__":
     main()
