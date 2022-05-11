@@ -47,9 +47,9 @@ def compute_Fisher(model, input_mask, total_tokens):
                     outputs[name] = score
     # cls output
     name = 'cls_output'
-    dH = model.classifier.cls_output.grad
+    dH = model.classifier.cls_output.grad # This one uses final output of FC layer, size of labels
     w = model.classifier.out_proj.weight
-    dx = torch.matmul(dH, w)
+    dx = torch.matmul(dH, w) # To implicate original paper, I multiplied W vector of FC layer (It's same as calculating grad of x)
     score = dx
 
     if score is not None and name not in outputs:
